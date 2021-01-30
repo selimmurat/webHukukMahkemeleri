@@ -1,9 +1,14 @@
 ﻿using Business.Abstract;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Result;
+using Core.Utilities.Result.Abstract;
 using Core.Utilities.Result.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,12 +27,11 @@ namespace Business.Concrete
             _employeeDal = employeeDal;
         }
 
+        [ValidationAspect(typeof(EmployeeValidator))]
         public IResult Add(Employee employee)
         {
-            if (employee.TC_KimlikNo != null)
-            {
-                return new ErrorResult("T.C. Kimlik numarası boş bırakılamaz.");
-            }
+            //business kodları gelecek 
+
             _employeeDal.Add(employee);
             return new SuccessResult("Personel ekleme işlemi başarılı");
         }
@@ -38,24 +42,24 @@ namespace Business.Concrete
             return new Result(true, "Personel Silinmiştir.");
         }
 
-        public List<Employee> GetAll()
+        public IDataResult<List<Employee>> GetAll()
         {
-            return _employeeDal.GetList().ToList();
+            return new SuccessDataResult<List<Employee>>(_employeeDal.GetList().ToList(), "Tüm Personeller Listelendi.");
         }
 
-        public Employee GetById(int Id)
+        public IDataResult<Employee> GetById(int Id)
         {
-            return _employeeDal.Get(e => e.Id == Id);
+            return new SuccessDataResult<Employee>(_employeeDal.Get(e => e.Id == Id));
         }
 
-        public Employee GetBySicilNo(string sicilNo)
+        public IDataResult<Employee> GetBySicilNo(string sicilNo)
         {
-            return _employeeDal.Get(e => e.sicil_no == sicilNo);
+            return new SuccessDataResult<Employee>(_employeeDal.Get(e => e.sicil_no == sicilNo));
         }
 
-        public List<Employee> GetByTC_KimlikNo(string TC_KimlikNo)
+        public IDataResult<List<Employee>> GetByTC_KimlikNo(string TC_KimlikNo)
         {
-            return _employeeDal.GetList(e => e.TC_KimlikNo == TC_KimlikNo).ToList();
+            return new SuccessDataResult<List<Employee>>(_employeeDal.GetList(e => e.TC_KimlikNo == TC_KimlikNo).ToList());
         }
 
         public IResult Update(Employee employee)

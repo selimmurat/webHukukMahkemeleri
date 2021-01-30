@@ -25,10 +25,10 @@ namespace HukukMahkemeleriWebAPI.Controllers
             return Ok(_employeeUnitRoleService.GetAll());
         }
 
-        [HttpGet("GetByEmployeeId/{GetByEmployeeId}")]
+        [HttpGet("getUnitRoleDetailDTO/{employeeId}")]
         public IActionResult GetByEmployeeId(int employeeId)
         {
-            return Ok(_employeeUnitRoleService.GetByEmployeeId(employeeId));
+            return Ok(_employeeUnitRoleService.getUnitRoleDetailDTO(employeeId));
         }
     }
 }

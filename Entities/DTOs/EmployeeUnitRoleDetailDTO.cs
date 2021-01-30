@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Core.Entities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Entities.DTOs
 {
-    public class EmployeeUnitRoleDetailDTO
+    public class EmployeeUnitRoleDetailDTO:IDto
     {
         #region employee  // personel tablosu
         public int employeeId { get; set; }

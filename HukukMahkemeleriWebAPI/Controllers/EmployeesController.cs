@@ -25,13 +25,23 @@ namespace HukukMahkemeleriWebAPI.Controllers
         [HttpGet("getAll")]
         public IActionResult GetList()
         {
-            return Ok(_employeeService.GetAll());
+            var result = _employeeService.GetAll();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
 
         [HttpGet("getById/{id}")]
         public IActionResult getById(int id)
         {
-            return Ok(_employeeService.GetById(id));
+            var result = _employeeService.GetById(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
         [HttpGet("getByTCKimlikNo/{tcKimlikNo}")]
         public IActionResult getByTCKimlikNo(string tcKimlikNo)
@@ -43,12 +53,16 @@ namespace HukukMahkemeleriWebAPI.Controllers
         {
             return Ok(_employeeService.GetBySicilNo(sicilNo));
         }
+
         [HttpPost("createEmployee")]
         public IActionResult createEmployee(Employee employee)
         {
-           _employeeService.Add(employee);
-            return Ok();
-            
+            var result = _employeeService.Add(employee);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
     }
 }

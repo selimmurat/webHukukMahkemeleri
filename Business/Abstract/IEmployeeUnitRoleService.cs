@@ -9,7 +9,7 @@ namespace Business.Abstract
     public interface IEmployeeUnitRoleService
     {
         List<EmployeeUnitRole> GetAll();
-        EmployeeUnitRoleDetailDTO GetByEmployeeId(int id);
+        List<EmployeeUnitRoleDetailDTO> getUnitRoleDetailDTO(int employee_Id);
         void Add(EmployeeUnitRole employeeUnitRole);
         void Delete(EmployeeUnitRole employeeUnitRole);
         void Update(EmployeeUnitRole employeeUnitRole);

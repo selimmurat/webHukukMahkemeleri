@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Result;
+using Core.Utilities.Result.Concrete;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -17,14 +19,16 @@ namespace Business.Concrete
             _adjectiveDAL = adjectiveDAL;
         }
 
-        public void Add(Adjective adjective)
+        public IResult Add(Adjective adjective)
         {
             _adjectiveDAL.Add(adjective);
+            return new Result(true, "");
         }
 
-        public void Delete(Adjective adjective)
+        public IResult Delete(Adjective adjective)
         {
             _adjectiveDAL.Delete(adjective);
+            return new SuccessResult("Başarılı bir şekilde silindi");
         }
 
         public List<Adjective> GetAll()
@@ -42,9 +46,10 @@ namespace Business.Concrete
             return _adjectiveDAL.Get(a => a.adjective_name == name);
         }
 
-        public void Update(Adjective adjective)
+        public IResult Update(Adjective adjective)
         {
             _adjectiveDAL.Update(adjective);
+            return new SuccessResult("Güncelleme işlemi başarılı");
         }
     }
 }

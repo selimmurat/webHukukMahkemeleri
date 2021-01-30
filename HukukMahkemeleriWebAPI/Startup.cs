@@ -29,7 +29,7 @@ namespace HukukMahkemeleriWebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IEmployeeService, EmployeeManager>();
+            /*services.AddSingleton<IEmployeeService, EmployeeManager>();
             services.AddSingleton<IEmployeeDAL, EfEmployeeDAL>();
             services.AddSingleton<IAdjectiveService, AdjectiveManager>();
             services.AddSingleton<IAdjectiveDAL, EfAdjectiveDAL>();
@@ -78,7 +78,7 @@ namespace HukukMahkemeleriWebAPI
             services.AddSingleton<IUnitOpenFileService, UnitOpenFileManager>();
             services.AddSingleton<IUnitOpenFileDAL, EfUnitOpenFileDAL>();
             services.AddSingleton<IUnitOpenFileService, UnitOpenFileManager>();
-            services.AddSingleton<IUnitOpenFileDAL, EfUnitOpenFileDAL>();
+            services.AddSingleton<IUnitOpenFileDAL, EfUnitOpenFileDAL>();*/
 
             services.AddCors(options => options.AddDefaultPolicy(
                     builder => builder.AllowAnyOrigin())
