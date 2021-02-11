@@ -79,6 +79,10 @@ namespace HukukMahkemeleriWebAPI
             services.AddSingleton<IUnitOpenFileDAL, EfUnitOpenFileDAL>();
             services.AddSingleton<IUnitOpenFileService, UnitOpenFileManager>();
             services.AddSingleton<IUnitOpenFileDAL, EfUnitOpenFileDAL>();
+
+            services.AddCors(options => options.AddDefaultPolicy(
+                    builder => builder.AllowAnyOrigin())
+            );
             services.AddControllers();
         }
 
@@ -93,6 +97,8 @@ namespace HukukMahkemeleriWebAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthorization();
 

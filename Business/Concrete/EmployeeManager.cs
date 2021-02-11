@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Result;
+using Core.Utilities.Result.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
@@ -20,21 +22,20 @@ namespace Business.Concrete
             _employeeDal = employeeDal;
         }
 
-        public void Add(Employee employee)
+        public IResult Add(Employee employee)
         {
-            /*Employee emp = new Employee();
-
-            emp.TC_KimlikNo = employee.Name;
-            emp.sicil_no = employee.sicil_no;
-            emp.Name = employee.Name;
-            emp.SurName = employee.SurName;
-            emp.Email = employee.Email;*/
+            if (employee.TC_KimlikNo != null)
+            {
+                return new ErrorResult("T.C. Kimlik numarası boş bırakılamaz.");
+            }
             _employeeDal.Add(employee);
+            return new SuccessResult("Personel ekleme işlemi başarılı");
         }
 
-        public void Delete(Employee employee)
+        public IResult Delete(Employee employee)
         {
             _employeeDal.Delete(employee);
+            return new Result(true, "Personel Silinmiştir.");
         }
 
         public List<Employee> GetAll()
@@ -57,9 +58,10 @@ namespace Business.Concrete
             return _employeeDal.GetList(e => e.TC_KimlikNo == TC_KimlikNo).ToList();
         }
 
-        public void Update(Employee employee)
+        public IResult Update(Employee employee)
         {
             _employeeDal.Update(employee);
+            return new Result(true, "Personel bilgileri güncellenmiştir.");
         }
     }
 }

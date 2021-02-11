@@ -1,8 +1,7 @@
-﻿using Entities.Concrete;
+﻿using Core.Utilities.Result;
+using Entities.Concrete;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Core.Uilities.Results;
 
 
 namespace Business.Abstract
@@ -13,9 +12,9 @@ namespace Business.Abstract
         Employee GetById(int Id);
         List<Employee> GetByTC_KimlikNo(string TC_KimlikNo);
         Employee GetBySicilNo(string sicilNo);
-        void Add(Employee employee);
-        void Delete(Employee employee);
-        void Update(Employee employee);
+        IResult Add(Employee employee);
+        IResult Delete(Employee employee);
+        IResult Update(Employee employee);
 
     }
 }
