@@ -11,7 +11,7 @@ namespace DataAccess.Concrete.EntityFramework
     public class EfUnitDAL : EfEntityRepositoryBase<Unit, HelperContext>, IUnitDAL
     {
         public List<UnitDetailDto> getUnitDetails()
-        {
+    {
             throw new NotImplementedException();
         }
     }

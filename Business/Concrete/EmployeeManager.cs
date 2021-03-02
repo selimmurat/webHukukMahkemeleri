@@ -32,6 +32,11 @@ namespace Business.Concrete
         {
             //business kodları gelecek 
 
+            emp.TC_KimlikNo = employee.Name;
+            emp.sicil_no = employee.sicil_no;
+            emp.Name = employee.Name;
+            emp.SurName = employee.SurName;
+            emp.Email = employee.Email;*/
             _employeeDal.Add(employee);
             return new SuccessResult("Personel ekleme işlemi başarılı");
         }

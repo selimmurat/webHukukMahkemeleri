@@ -43,7 +43,42 @@ namespace Business.Concrete
                              join eur in context.t_gnl_employee_unit_role on e.Id equals eur.employee_Id
                              join u in context.t_gnl_unit on eur.unit_Id equals u.Id
                              join r in context.t_gnl_role.DefaultIfEmpty() on eur.role_Id equals r.Id
-                              
+
+                                  where eur.employee_Id == employeeId
+                                  select new
+                                  {
+                                      #region employee tablosu 
+                                      eur.employee_Id,
+                                      e.TC_KimlikNo,
+                                      e.sicil_no,
+                                      e.Name,
+                                      e.SurName,
+                                      e.Email,
+                                      #endregion
+                                      #region Unit tablosu
+                                      u.Id,
+                                      u.unit_code,
+                                      u.unit_name,
+                                      #endregion
+                                      #region Unit Area tablosu
+                                      t.unit_area_id,
+                                      a.unit_area_name,
+                                      #endregion
+                                      #region Unit type tablosu
+                                      u.unit_type_id,
+                                      t.unit_type_name,
+                                      #endregion
+                                      #region City
+                                      u.city_id,
+                                      c.city_name,
+                                      #endregion
+                                      #region Role
+                                      eur.role_Id,
+                                      r.role_name,
+                                      #endregion
+                                      #region District
+                                      d.district_name
+                                      #endregion
 
                              where e.Id == employee_Id
                              select new EmployeeUnitRoleDetailDTO
@@ -51,6 +86,7 @@ namespace Business.Concrete
 
                 return result.ToList();
             }
+            return dto;
         }
 
         public void Update(EmployeeUnitRole employeeUnitRole)

@@ -29,7 +29,7 @@ namespace HukukMahkemeleriWebAPI.Controllers
             if (result.Success)
             {
                 return Ok(result);
-            }
+        }
             return BadRequest(result);
         }
 
@@ -59,7 +59,7 @@ namespace HukukMahkemeleriWebAPI.Controllers
         {
             var result = _employeeService.Add(employee);
             if (result.Success)
-            {
+        {
                 return Ok(result);
             }
             return BadRequest(result);
